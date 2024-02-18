@@ -10,7 +10,7 @@ class CascadeResolutions:
         return {'required': {'size_selected': (s.size_sizes,)}}
 
     RETURN_TYPES = ("INT","INT")
-    RETURN_NAMES = ("x","y")
+    RETURN_NAMES = ("width","height")
     FUNCTION = "return_res"
     OUTPUT_NODE = True
     CATEGORY = "Resolution"
@@ -18,7 +18,7 @@ class CascadeResolutions:
     def return_res(self, size_selected):
         width = self.size_dict[size_selected]["width"]
         height = self.size_dict[size_selected]["height"]
-        return ({"x":width},{"y": height})
+        return (width,height)
         pass
 
 # A dictionary that contains all nodes you want to export with their names
