@@ -11,7 +11,7 @@ class CascadeResolutions:
         return {
             'required': {
                 'size_selected': (cls.size_sizes,), 
-                'multiply_factor': ("INT", "FLOAT")
+                'multiply_factor': ("FLOAT", {"default": 1, "max": 16, "min": 0.5, "step": 0.1, "display": "number"})
             }
         }
 
@@ -24,8 +24,8 @@ class CascadeResolutions:
     def return_res(self, size_selected, multiply_factor):
         # Extract resolution name and dimensions using the key
         selected_info = self.size_dict[size_selected]
-        width = selected_info["width"] * multiply_factor
-        height = selected_info["height"] * multiply_factor
+        width = int(selected_info["width"] * multiply_factor)
+        height = int(selected_info["height"] * multiply_factor)
         name = selected_info["name"]
         return (width, height,name)
 
