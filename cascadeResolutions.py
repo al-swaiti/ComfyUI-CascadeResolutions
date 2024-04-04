@@ -10,7 +10,6 @@ class CascadeResolutions:
         cls.size_sizes, cls.size_dict = read_sizes()
         return {
             'required': {
-<<<<<<< HEAD
                 'size_selected': (cls.size_sizes,),  # Existing dropdown for predefined sizes
                 'multiply_factor': ("INT" ,{"default": 1, "min": 1}),  # Existing multiply factor
                 'manual_width': ("INT", {
@@ -26,20 +25,10 @@ class CascadeResolutions:
 
     RETURN_TYPES = ("INT", "INT")
     RETURN_NAMES = ("width", "height")
-=======
-                'size_selected': (cls.size_sizes,), 
-                'multiply_factor': ("FLOAT", {"default": 1, "max": 16, "min": 0.5, "step": 0.1, "display": "number"})
-            }
-        }
-
-    RETURN_TYPES = ( "INT", "INT")
-    RETURN_NAMES = ( "width", "height")
->>>>>>> upstream/main
     FUNCTION = "return_res"
     OUTPUT_NODE = True
     CATEGORY = "Resolution"
 
-<<<<<<< HEAD
     def return_res(self, size_selected, multiply_factor, manual_width, manual_height):
         # Initialize width and height from the manual input if provided
         if manual_width > 0 and manual_height > 0:
@@ -54,15 +43,6 @@ class CascadeResolutions:
             name = selected_info["name"]
         
         return (width, height, name)
-=======
-    def return_res(self, size_selected, multiply_factor):
-        # Extract resolution name and dimensions using the key
-        selected_info = self.size_dict[size_selected]
-        width = int(selected_info["width"] * multiply_factor)
-        height = int(selected_info["height"] * multiply_factor)
-        name = selected_info["name"]
-        return (width, height,name)
->>>>>>> upstream/main
 
 NODE_CLASS_MAPPINGS = {
     "CascadeResolutions": CascadeResolutions
