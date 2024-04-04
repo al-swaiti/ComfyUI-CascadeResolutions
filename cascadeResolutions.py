@@ -10,24 +10,39 @@ class CascadeResolutions:
         cls.size_sizes, cls.size_dict = read_sizes()
         return {
             'required': {
-                'size_selected': (cls.size_sizes,), 
-                'multiply_factor': ("INT", "FLOAT")
+                'size_selected': (cls.size_sizes,),  # Existing dropdown for predefined sizes
+                'multiply_factor': ("INT" ,{"default": 1, "min": 1}),  # Existing multiply factor
+                'manual_width': ("INT", {
+                    "default": 0,  # Default value indicating it may not be used
+                    "min": 0,  # Minimum value
+                }),
+                'manual_height': ("INT", {
+                    "default": 0,  # Default value indicating it may not be used
+                    "min": 0,  # Minimum value
+                }),
             }
         }
 
-    RETURN_TYPES = ( "INT", "INT")
-    RETURN_NAMES = ( "width", "height")
+    RETURN_TYPES = ("INT", "INT")
+    RETURN_NAMES = ("width", "height")
     FUNCTION = "return_res"
     OUTPUT_NODE = True
     CATEGORY = "Resolution"
 
-    def return_res(self, size_selected, multiply_factor):
-        # Extract resolution name and dimensions using the key
-        selected_info = self.size_dict[size_selected]
-        width = selected_info["width"] * multiply_factor
-        height = selected_info["height"] * multiply_factor
-        name = selected_info["name"]
-        return (width, height,name)
+    def return_res(self, size_selected, multiply_factor, manual_width, manual_height):
+        # Initialize width and height from the manual input if provided
+        if manual_width > 0 and manual_height > 0:
+            width = manual_width * multiply_factor
+            height = manual_height * multiply_factor
+            name = "Custom Size"
+        else:
+            # Extract resolution name and dimensions using the key
+            selected_info = self.size_dict[size_selected]
+            width = selected_info["width"] * multiply_factor
+            height = selected_info["height"] * multiply_factor
+            name = selected_info["name"]
+        
+        return (width, height, name)
 
 NODE_CLASS_MAPPINGS = {
     "CascadeResolutions": CascadeResolutions
