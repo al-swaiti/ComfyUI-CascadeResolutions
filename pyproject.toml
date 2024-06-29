@@ -1,0 +1,14 @@
+[project]
+name = "comfyui-cascaderesolutions"
+description = "Nodes:Cascade Resolutions"
+version = "1.0.0"
+license = "LICENSE"
+
+[project.urls]
+Repository = "https://github.com/al-swaiti/ComfyUI-CascadeResolutions"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-CascadeResolutions"
+Icon = ""
